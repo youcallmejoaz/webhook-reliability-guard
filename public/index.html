@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reliability Guard</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"><span></span></div>
+      <div>
+        <h1>Reliability Guard</h1>
+        <p class="sub">Every event between your tools, received, retried and reconciled</p>
+      </div>
+    </div>
+    <span id="mode" class="mode"></span>
+  </header>
+  <nav class="tabs" id="tabs">
+    <button data-tab="overview" class="active">Overview</button>
+    <button data-tab="dead">Dead letter <b id="dead-count" class="count">0</b></button>
+    <button data-tab="recon">Reconciliation</button>
+    <button data-tab="slack">Slack alerts</button>
+    <button data-tab="email">Email check</button>
+    <button data-tab="buyers">Buyer list</button>
+  </nav>
+
+  <main>
+    <section id="tiles" class="tiles">
+      <div class="tile" id="t-events"><span class="label">Events today</span><span class="value">0</span></div>
+      <div class="tile good" id="t-delivered"><span class="label">Delivered</span><span class="value">0</span></div>
+      <div class="tile warn" id="t-retrying"><span class="label">Retrying</span><span class="value">0</span></div>
+      <div class="tile bad" id="t-dead"><span class="label">Dead letter</span><span class="value">0</span></div>
+      <div class="tile info" id="t-misses"><span class="label">Silent misses caught</span><span class="value">0</span></div>
+    </section>
+
+    <section class="view active" id="view-overview">
+      <div class="overview">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Live deliveries</h2>
+            <div class="legend">
+              <span><i class="dot ok"></i>Delivered</span>
+              <span><i class="dot retry"></i>Failed, retrying</span>
+              <span><i class="dot wait"></i>Waiting</span>
+              <span><i class="dot dead"></i>Dead letter</span>
+            </div>
+          </div>
+          <div id="events" class="events"><p class="empty">No events yet. Start the chaos test to send 50 purchases.</p></div>
+        </div>
+        <div class="panel term-panel">
+          <div class="panel-head">
+            <h2>Chaos test</h2>
+            <button id="chaos-start" class="btn primary">Start chaos test</button>
+          </div>
+          <p class="hint">Sends 50 purchases from the store while 20% of deliveries fail and 5% are dropped silently.</p>
+          <div id="terminal" class="terminal" aria-live="polite"><div class="line dim">Ready.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-dead">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Dead letter queue</h2>
+          <button id="replay-all" class="btn">Replay all</button>
+        </div>
+        <p class="hint">Deliveries that failed every retry. They wait here for a person. Replay is safe: the tool sees the same idempotency key, so nobody gets a duplicate.</p>
+        <table class="table" id="dead-table"><thead><tr><th>Order</th><th>Buyer</th><th>Tool</th><th>Tries</th><th>Last error</th><th>Failed at</th><th></th></tr></thead><tbody></tbody></table>
+      </div>
+    </section>
+
+    <section class="view" id="view-recon">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Reconciliation</h2>
+          <button id="recon-run" class="btn primary">Run check now</button>
+        </div>
+        <p class="hint" id="recon-hint">Every 15 minutes the guard asks the store for recent purchases and checks that every buyer really has an account and a welcome email.</p>
+        <div id="recon-status" class="recon-status"></div>
+        <table class="table" id="miss-table"><thead><tr><th>Order</th><th>Buyer</th><th>What was wrong</th><th>Found at</th><th>Now</th></tr></thead><tbody></tbody></table>
+      </div>
+    </section>
+
+    <section class="view" id="view-slack">
+      <div class="slack">
+        <aside class="slack-side">
+          <div class="ws">Demo workspace</div>
+          <div class="ch active"># automation-alerts</div>
+          <div class="ch"># general</div>
+        </aside>
+        <div class="slack-main">
+          <div class="slack-head"># automation-alerts <span>Alerts explained in plain English</span></div>
+          <div id="slack-feed" class="slack-feed"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-email">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Email check <span id="email-domain" class="muted"></span></h2>
+          <button id="email-run" class="btn">Check again</button>
+        </div>
+        <p id="email-summary" class="email-summary"></p>
+        <div id="email-checks" class="checks"></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-buyers">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Buyer list</h2>
+          <span id="sheet-sync" class="muted"></span>
+        </div>
+        <div class="sheet-wrap">
+          <table class="sheet" id="sheet"><thead></thead><tbody></tbody></table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside id="drawer" class="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <h2 id="drawer-title">Event</h2>
+      <button id="drawer-close" class="btn small">Close</button>
+    </div>
+    <div id="drawer-body"></div>
+  </aside>
+  <div id="toast" class="toast"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
