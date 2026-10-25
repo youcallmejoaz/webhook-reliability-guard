@@ -1,0 +1,5 @@
+{
+  "summary": "The {{destination}} could not be reached {{failures}} times between {{first_time}} and {{last_time}} (\"{{top_error}}\").",
+  "likely_cause": "The address for the {{destination}} is wrong, its domain stopped resolving, or a firewall is blocking the connection.",
+  "suggested_fix": "Check that the {{destination}} address in the settings is correct and that the site loads in a browser. Deliveries keep retrying meanwhile, up to {{max_attempts}} times."
+}

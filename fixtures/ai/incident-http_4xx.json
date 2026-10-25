@@ -1,0 +1,5 @@
+{
+  "summary": "The {{destination}} rejected {{failures}} deliveries between {{first_time}} and {{last_time}} with \"{{top_error}}\". Affected orders include {{affected}}.",
+  "likely_cause": "Errors in the 400 range mean the {{destination}} did not accept the request itself, most often an expired API key, a changed password or a field it no longer expects.",
+  "suggested_fix": "Retrying will not help, so these went straight to the dead letter queue. Check the {{destination}} credentials, then replay them from the dashboard."
+}

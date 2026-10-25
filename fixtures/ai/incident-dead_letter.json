@@ -1,0 +1,5 @@
+{
+  "summary": "A delivery to the {{destination}} failed {{max_attempts}} times in a row and was moved to the dead letter queue at {{last_time}}. Deliveries waiting there now: {{dead_count}}. The last error was \"{{top_error}}\".",
+  "likely_cause": "The {{destination}} was down for longer than the retry window. Between {{first_time}} and {{last_time}} it answered with: {{errors}}.",
+  "suggested_fix": "Confirm the {{destination}} is back up, then press Replay on the dead letter queue. Replays are safe: the same idempotency key is sent, so nobody gets a duplicate."
+}

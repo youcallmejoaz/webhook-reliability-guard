@@ -1,0 +1,5 @@
+{
+  "summary": "The {{destination}} refused {{failures}} deliveries between {{first_time}} and {{last_time}}. The most common reply was \"{{top_error}}\". Affected orders include {{affected}}.",
+  "likely_cause": "The {{destination}} was overloaded or briefly down. Errors in the 500 range come from its side, not from the data we sent, and they started and stopped in a short burst.",
+  "suggested_fix": "No action needed for these orders: each one is retried automatically, up to {{max_attempts}} times with a growing pause. If this keeps happening, check the {{destination}} status page or hosting plan limits. Deliveries waiting in the dead letter queue right now: {{dead_count}}."
+}

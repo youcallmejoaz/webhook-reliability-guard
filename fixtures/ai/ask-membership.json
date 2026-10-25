@@ -1,0 +1,4 @@
+{
+  "answer": "In {{period}}, the {{destination}} failed {{failed_attempts}} times across {{customers_affected}} orders, between {{first_failure}} and {{last_failure}}. The main error was \"{{top_error}}\". Every failure was retried automatically and {{delivered_after_retry}} buyers got access on a later try. Reconciliation also caught {{silent_misses_caught}} silent misses, orders the site said it saved but did not, and queued them again. {{still_in_dead_letter}} are waiting in the dead letter queue: {{dead_letter_orders}}.",
+  "no_failures": "In {{period}}, every delivery to the {{destination}} went through. Reconciliation caught {{silent_misses_caught}} silent misses, orders the site said it saved but did not, and queued them again."
+}

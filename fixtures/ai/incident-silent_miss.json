@@ -1,0 +1,5 @@
+{
+  "summary": "The reconciliation check at {{time}} found {{miss_count}} silent misses, orders that looked fine but were not: {{affected}}.",
+  "likely_cause": "Webhooks that never arrived from the store: {{missed_webhooks}}. Deliveries answered with \"ok\" but not saved: {{dropped}} ({{dropped_by}}). Nothing showed an error, which is why only a comparison against the source catches these.",
+  "suggested_fix": "Already handled: all of them were queued again automatically and will be delivered with the usual retries. If this keeps showing up for the same tool, ask its developer why it reports success without saving."
+}
