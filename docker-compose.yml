@@ -1,0 +1,17 @@
+services:
+  guard:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DEMO_MODE: ${DEMO_MODE:-1}
+      BASE_URL: http://localhost:3000
+    volumes:
+      - guard-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  guard-data:
