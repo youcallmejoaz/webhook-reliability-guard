@@ -1,0 +1,9 @@
+node_modules/
+data/
+.env
+*.log
+clips/raw/
+clips/frames/
+clips/proposal_cut_frames/
+clips/audio/
+.DS_Store

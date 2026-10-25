@@ -1,0 +1,30 @@
+{
+  "name": "webhook-reliability-guard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Catches every webhook between your tools, retries failures, reconciles silent misses and explains incidents in plain English.",
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "tsx src/server.ts",
+    "seed": "tsx scripts/seed.ts",
+    "chaos": "tsx scripts/chaos.ts",
+    "explain": "tsx scripts/explain.ts",
+    "check-email": "tsx scripts/check-email.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clips": "node clips/record.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "1.1.0",
+    "@hono/node-server": "2.1.4",
+    "hono": "4.13.13",
+    "tsx": "4.23.13"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "typescript": "6.0.3",
+    "vitest": "3.2.4"
+  }
+}
