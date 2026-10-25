@@ -1,0 +1,9 @@
+{
+  "demo-academy.example": [
+    "v=spf1 include:_spf.mail-provider.example ~all",
+    "site-verification=demo-0000"
+  ],
+  "_dmarc.demo-academy.example": [
+    "v=DMARC1; p=quarantine; pct=100; adkim=r; aspf=r"
+  ]
+}
