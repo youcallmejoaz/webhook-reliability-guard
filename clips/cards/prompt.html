@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1920px; height: 1080px; background: #0b0f17; overflow: hidden; }
+  body { display: grid; place-items: center; font-family: 'DejaVu Sans Mono', ui-monospace, Menlo, monospace; }
+  .win { width: 1600px; height: 900px; background: #111827; border-radius: 18px; box-shadow: 0 30px 80px rgb(0 0 0 / 0.5); overflow: hidden; display: flex; flex-direction: column; }
+  .bar { height: 54px; background: #1f2937; display: flex; align-items: center; gap: 12px; padding: 0 22px; }
+  .bar i { width: 16px; height: 16px; border-radius: 50%; display: block; }
+  .bar span { color: #9ca3af; font-size: 20px; margin-left: 18px; font-family: Inter, sans-serif; }
+  .body { padding: 40px 48px; color: #e5e7eb; font-size: 30px; line-height: 1.5; flex: 1; overflow: hidden; }
+  .prompt { color: #f9fafb; white-space: pre-wrap; }
+  .prompt b { color: #4ade80; font-weight: 700; }
+  .caret { display: inline-block; width: 16px; height: 34px; background: #4ade80; vertical-align: -6px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .working { color: #fbbf24; margin-top: 28px; min-height: 45px; }
+  .result { margin-top: 18px; white-space: pre-wrap; }
+  .result div { opacity: 0; transform: translateY(8px); transition: all 0.35s ease; }
+  .result div.on { opacity: 1; transform: none; }
+  .result .h { color: #4ade80; font-weight: 700; }
+  .result .dim { color: #9ca3af; font-size: 24px; }
+</style>
+</head>
+<body>
+  <div class="win">
+    <div class="bar"><i style="background:#ef4444"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i><span id="title">webhook-reliability-guard</span></div>
+    <div class="body">
+      <div class="prompt"><b>&gt; </b><span id="typed"></span><span class="caret" id="caret"></span></div>
+      <div class="working" id="working"></div>
+      <div class="result" id="result"></div>
+    </div>
+  </div>
+<script>
+  // play({ prompt, cps, working, lines: [{ text, cls }] }) types the prompt, then reveals the result.
+  window.play = async ({ prompt, cps, working, lines, lineDelay }) => {
+    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+    const typed = document.getElementById('typed');
+    for (const ch of prompt) {
+      typed.textContent += ch;
+      await wait(1000 / cps);
+    }
+    await wait(500);
+    document.getElementById('caret').style.display = 'none';
+    const w = document.getElementById('working');
+    for (let i = 0; i < 3; i++) {
+      w.textContent = working + '.'.repeat(i + 1);
+      await wait(350);
+    }
+    w.textContent = '';
+    const box = document.getElementById('result');
+    for (const l of lines) {
+      const d = document.createElement('div');
+      d.textContent = l.text;
+      if (l.cls) d.className = l.cls;
+      box.appendChild(d);
+      await wait(30);
+      d.classList.add('on');
+      await wait(lineDelay);
+    }
+    window.done = true;
+  };
+</script>
+</body>
+</html>

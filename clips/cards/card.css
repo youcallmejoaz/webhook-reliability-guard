@@ -1,0 +1,11 @@
+/* Explainer cards: white background, dark text, green, amber and red accents. 1920 x 1080. */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1920px; height: 1080px; background: #ffffff; overflow: hidden; }
+body { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; color: #0f172a; display: flex; flex-direction: column; justify-content: center; padding: 0 160px; }
+.green { color: #16a34a; } .amber { color: #d97706; } .red { color: #dc2626; }
+.in { opacity: 0; transform: translateY(24px); animation: in 0.6s ease forwards; }
+@keyframes in { to { opacity: 1; transform: none; } }
+.kicker { font-size: 34px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #64748b; margin-bottom: 36px; }
+h1 { font-size: 92px; line-height: 1.08; font-weight: 800; letter-spacing: -0.02em; }
+.line { font-size: 96px; font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+.bar { height: 14px; width: 220px; border-radius: 7px; margin-top: 56px; }

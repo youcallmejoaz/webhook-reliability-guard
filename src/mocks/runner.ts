@@ -86,6 +86,21 @@ export async function runChaos(ctx: Ctx, opts: ChaosOptions, log: ChaosLog): Pro
   return { purchases: buyers.length, dropped: dropCount };
 }
 
+// A few more purchases from returning buyers, for showing the buyer list update live.
+export async function emitPurchases(ctx: Ctx, count: number, intervalMs: number): Promise<number> {
+  if (!ctx.mocks) throw new Error('demo mode only');
+  const { state } = ctx.mocks;
+  const buyers = state.buyers();
+  const already = state.purchasesSince(0).length;
+  for (let i = 0; i < count; i++) {
+    const buyer = buyers[(already * 7 + i * 11) % buyers.length];
+    const event = state.createStoreEvent('purchase.created', buyer, { product: 'Coaching Bundle', amount: 499 });
+    state.setWebhookStatus(event.id, await sendStoreWebhook(event, `${ctx.config.baseUrl}/webhooks/store`, ctx.config.sourceSecrets.store));
+    await sleep(intervalMs);
+  }
+  return count;
+}
+
 // Checks the outcome from the tools' own records: who has access, and how many welcome emails each got.
 export function verifyOutcome(ctx: Ctx): { buyers: number; withAccess: number; duplicateAccounts: number; withOneWelcomeEmail: number; duplicateEmails: number; missing: string[] } {
   if (!ctx.mocks) throw new Error('verify runs only in demo mode');

@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="card.css"><style>
+body { padding: 0 90px; }
+.kicker { animation-delay: 0.1s; }
+.flow { display: flex; align-items: stretch; gap: 0; }
+.step { flex: 1; border: 4px solid #e2e8f0; border-radius: 28px; padding: 40px 26px; text-align: center; background: #fff; }
+.step .n { width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 26px; display: grid; place-items: center; font-size: 38px; font-weight: 800; color: #fff; }
+.step .t { font-size: 46px; font-weight: 800; line-height: 1.1; }
+.step .d { font-size: 27px; color: #475569; margin-top: 16px; line-height: 1.3; }
+.arrow { width: 54px; display: grid; place-items: center; font-size: 54px; color: #94a3b8; font-weight: 800; }
+.s1 { animation-delay: 0.5s; } .a1 { animation-delay: 1.4s; } .s2 { animation-delay: 1.6s; } .a2 { animation-delay: 2.5s; } .s3 { animation-delay: 2.7s; }
+.a3 { animation-delay: 3.6s; } .s4 { animation-delay: 3.8s; } .a4 { animation-delay: 4.7s; } .s5 { animation-delay: 4.9s; }
+.g .n { background: #16a34a; } .g { border-color: #bbf7d0; }
+.am .n { background: #d97706; } .am { border-color: #fde68a; }
+.b .n { background: #2563eb; } .b { border-color: #bfdbfe; }
+</style></head><body>
+  <div class="kicker in">How it works</div>
+  <div class="flow">
+    <div class="step g in s1"><div class="n">1</div><div class="t">Receive and save</div><div class="d">Every event is stored the moment it arrives</div></div>
+    <div class="arrow in a1">&rsaquo;</div>
+    <div class="step g in s2"><div class="n">2</div><div class="t">Deliver</div><div class="d">To the membership site, email and n8n</div></div>
+    <div class="arrow in a2">&rsaquo;</div>
+    <div class="step am in s3"><div class="n">3</div><div class="t">Retry</div><div class="d">With a growing pause until it works</div></div>
+    <div class="arrow in a3">&rsaquo;</div>
+    <div class="step b in s4"><div class="n">4</div><div class="t">Reconcile</div><div class="d">Every 15 minutes, fix what slipped through</div></div>
+    <div class="arrow in a4">&rsaquo;</div>
+    <div class="step b in s5"><div class="n">5</div><div class="t">Explain</div><div class="d">Plain English in Slack when it keeps failing</div></div>
+  </div>
+</body></html>

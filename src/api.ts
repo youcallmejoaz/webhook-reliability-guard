@@ -6,7 +6,7 @@ import { replayDelivery, replayEvent } from './worker.js';
 import { reconcile } from './reconcile.js';
 import { ask } from './incidents.js';
 import { buildBuyerList } from './buyers.js';
-import { runChaos, verifyOutcome, ChaosLog, type ChaosOptions } from './mocks/runner.js';
+import { runChaos, verifyOutcome, emitPurchases, ChaosLog, type ChaosOptions } from './mocks/runner.js';
 import { demoBuyers } from './mocks/buyers.js';
 import { rmSync } from 'node:fs';
 import { join } from 'node:path';
@@ -178,6 +178,12 @@ export function apiRoutes(ctx: Ctx, chaosLog: ChaosLog): Hono {
     chaosLog.clear();
     rmSync(join(ctx.config.dataDir, 'buyers.csv'), { force: true });
     return c.json({ ok: true, buyers: 50 });
+  });
+  app.post('/demo/purchases', async (c) => {
+    if (!ctx.mocks) return c.json({ error: 'demo mode only' }, 400);
+    const b = (await c.req.json().catch(() => ({}))) as { count?: number; intervalMs?: number };
+    const sent = await emitPurchases(ctx, Math.min(10, b.count ?? 3), b.intervalMs ?? 1200);
+    return c.json({ ok: true, sent });
   });
   app.get('/chaos/verify', (c) => (ctx.mocks ? c.json(verifyOutcome(ctx)) : c.json({ error: 'demo mode only' }, 400)));
 
