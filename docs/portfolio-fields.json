@@ -1,0 +1,10 @@
+{
+  "titles": [
+    "Fix Missed Webhooks Between CRM, Payments and Membership Site",
+    "Webhook Monitoring: Retries, Reconciliation and AI Alerts",
+    "Automation Reliability System for CRM, WordPress and n8n Flows"
+  ],
+  "role": "Automation engineer: built the webhook receiver, retries, reconciliation, alerts and email checks",
+  "description": "Buyers pay, but their access email never arrives because webhooks between the store, CRM and membership site get lost. A demo build on sample data: every event is saved on arrival, delivered with automatic retries, and parked for one-click replay if a tool stays down. Every 15 minutes it checks each buyer has access and fixes silent misses. Claude explains repeated failures in Slack. It also checks SPF, DKIM and DMARC and syncs a buyer list. Safeguards: no duplicates, signed webhooks only, masked customer data. 28 tests pass. Built with TypeScript, Hono, SQLite and the Claude API.",
+  "skills": ["Automation", "Webhook", "API Integration", "n8n", "TypeScript"]
+}

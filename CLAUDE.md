@@ -26,7 +26,7 @@ webhook-reliability-guard is a safety net for business automations. It receives 
 - Ask why something failed: `npm run explain -- "Why did the welcome emails fail last night?"`
 - Email check: `npm run check-email`
 - Test: `npm test`; typecheck: `npm run typecheck`
-- Clips: `npm run clips` (needs ffmpeg and Playwright)
+- Clips: `npm run clips` (needs ffmpeg and Playwright). Proposal cut: `python3 clips/tts.py` then `python3 clips/render_proposal_cut.py`. Covers: `node docs/cover/render.mjs`
 
 ## Conventions
 

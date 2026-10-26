@@ -86,7 +86,7 @@ More detail in [PLAN.md](PLAN.md).
 npm test
 ```
 
-27 tests, including:
+28 tests, including:
 
 - With 20% failures and 5% silent drops, all 50 fictional buyers end up with access and exactly one welcome email.
 - Replaying an already delivered event creates no duplicate.

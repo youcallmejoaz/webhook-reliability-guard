@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cover B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1600px; height: 1200px; overflow: hidden; }
+  body { background: #f8fafc; color: #0f172a; font-family: Inter, sans-serif; position: relative; }
+  .head { position: absolute; left: 90px; right: 90px; top: 84px; text-align: center; }
+  h1 { font-size: 118px; line-height: 1; font-weight: 900; letter-spacing: -0.035em; }
+  h1 em { font-style: normal; color: #16a34a; }
+  .chips { display: flex; gap: 16px; justify-content: center; margin-top: 36px; }
+  .chip { font-size: 26px; font-weight: 700; padding: 12px 24px; border-radius: 999px; background: #dcfce7; color: #14532d; }
+  .frame { position: absolute; left: 150px; right: 150px; top: 470px; height: 620px; border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 40px 90px rgba(15,23,42,.22); border: 2px solid #e2e8f0; }
+  .bar { height: 48px; background: #f1f5f9; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; gap: 10px; padding: 0 18px; }
+  .bar i { width: 14px; height: 14px; border-radius: 50%; display: block; }
+  .shot { width: 100%; height: calc(100% - 48px); object-fit: cover; object-position: top left; display: block; }
+  .alert { position: absolute; left: 70px; top: 800px; width: 540px; background: #0f172a; color: #f8fafc; border-radius: 18px; padding: 24px 28px; box-shadow: 0 30px 70px rgba(15,23,42,.35); border-left: 10px solid #16a34a; }
+  .alert .who { display: flex; align-items: center; gap: 14px; font-size: 21px; font-weight: 800; }
+  .alert .av { width: 42px; height: 42px; border-radius: 10px; background: #16a34a; display: grid; place-items: center; font-size: 17px; font-weight: 900; }
+  .alert .ch { color: #94a3b8; font-weight: 600; font-size: 17px; }
+  .alert p { margin-top: 12px; font-size: 24px; line-height: 1.35; font-weight: 600; }
+  .alert p b { color: #4ade80; }
+  .tag { position: absolute; right: 90px; bottom: 64px; font-size: 19px; font-weight: 700; color: #64748b; }
+</style>
+</head>
+<body>
+  <div class="head">
+    <h1>Every Webhook <em>Caught</em><br>And Retried</h1>
+    <div class="chips">
+      <div class="chip">No duplicate emails</div>
+      <div class="chip">Silent misses fixed</div>
+      <div class="chip">Plain-English alerts</div>
+    </div>
+  </div>
+  <div class="frame">
+    <div class="bar"><i style="background:#ef4444"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i></div>
+    <img class="shot" src="../../clips/stills/dashboard_after_chaos.png" alt="">
+  </div>
+  <div class="alert">
+    <div class="who"><div class="av">RG</div>Reliability Guard <span class="ch"># automation-alerts</span></div>
+    <p>Reconciliation caught <b>3 silent misses</b>. All queued again and delivered.</p>
+  </div>
+  <div class="tag">Built with Claude Code</div>
+</body>
+</html>

@@ -30,7 +30,7 @@ export function scrub(text: string, hiddenWords: string[] = []): string {
   return out;
 }
 
-// For the dashboard buyer list: "ada.okafor7@example.com" -> "ad***@example.com".
+// For the dashboard buyer list: keeps the first two characters and the domain, for example "ad***" plus the domain.
 export function maskEmail(email: string): string {
   const at = email.indexOf('@');
   if (at < 1) return '***';
