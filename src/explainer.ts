@@ -30,8 +30,15 @@ const ASK_SYSTEM = `You answer a business owner's question about their automatio
 Answer in plain English in at most 6 short sentences: what happened, when, how many customers were affected, what the system already did about it, and what a person should do next.
 You can only read and explain. You cannot change settings or replay events, so never say you did. If the facts do not answer the question, say so. Do not invent numbers. No em dashes.`;
 
-function fill(template: string, facts: Facts): string {
-  return template.replace(/\{\{(\w+)\}\}/g, (_, key: string) => {
+const truthy = (v: Facts[string] | undefined) => (Array.isArray(v) ? v.length > 0 : typeof v === 'number' ? v > 0 : Boolean(v));
+
+// Mustache-style: {{key}} inserts a fact, {{#key}}...{{/key}} keeps text only when the fact is
+// non-empty or above zero, {{^key}}...{{/key}} only when it is not.
+export function fill(template: string, facts: Facts): string {
+  const sections = template
+    .replace(/\{\{#(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (_, key: string, inner: string) => (truthy(facts[key]) ? inner : ''))
+    .replace(/\{\{\^(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (_, key: string, inner: string) => (truthy(facts[key]) ? '' : inner));
+  return sections.replace(/\{\{(\w+)\}\}/g, (_, key: string) => {
     const value = facts[key];
     if (value === undefined) return '';
     return Array.isArray(value) ? value.join(', ') : String(value);

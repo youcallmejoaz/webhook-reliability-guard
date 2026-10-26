@@ -1,4 +1,4 @@
 {
-  "answer": "In {{period}}, the {{destination}} failed {{failed_attempts}} times across {{customers_affected}} events, between {{first_failure}} and {{last_failure}}, mostly with \"{{top_error}}\". The system retried them automatically and {{delivered_after_retry}} went through on a later try. {{still_in_dead_letter}} are waiting in the dead letter queue: {{dead_letter_orders}}.",
+  "answer": "In {{period}}, the {{destination}} failed {{failed_attempts}} times across {{customers_affected}} events, between {{first_failure}} and {{last_failure}}, mostly with \"{{top_error}}\". The system retried them automatically and {{delivered_after_retry}} went through on a later try. {{#still_in_dead_letter}}{{still_in_dead_letter}} are waiting in the dead letter queue: {{dead_letter_orders}}.{{/still_in_dead_letter}}{{^still_in_dead_letter}}None are left in the dead letter queue.{{/still_in_dead_letter}}",
   "no_failures": "In {{period}}, every event reached the {{destination}} without a failure."
 }

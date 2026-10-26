@@ -1,5 +1,5 @@
 {
   "summary": "The {{destination}} stopped answering in time for {{failures}} deliveries between {{first_time}} and {{last_time}} (\"{{top_error}}\"). Affected orders include {{affected}}.",
   "likely_cause": "The {{destination}} is slow, usually because it is busy or a plugin on it is taking too long. Some of these requests may have been processed even though no reply came back.",
-  "suggested_fix": "Retries are safe here: every delivery carries an idempotency key, so a request that did go through is not repeated. If timeouts continue, ask the host to check the server load. Deliveries waiting in the dead letter queue right now: {{dead_count}}."
+  "suggested_fix": "Retries are safe here: every delivery carries an idempotency key, so a request that did go through is not repeated. If timeouts continue, ask the host to check the server load. {{#dead_count}}Deliveries waiting in the dead letter queue right now: {{dead_count}}.{{/dead_count}}"
 }

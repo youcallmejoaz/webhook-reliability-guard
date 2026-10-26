@@ -5,6 +5,7 @@ import { reconcile } from '../src/reconcile.js';
 import { ask } from '../src/incidents.js';
 import { scrub, maskEmail } from '../src/mask.js';
 import { backoffMs } from '../src/worker.js';
+import { fill } from '../src/explainer.js';
 
 describe('incident explainer, masking and demo mode', () => {
   let g: TestGuard;
@@ -56,6 +57,12 @@ describe('incident explainer, masking and demo mode', () => {
     expect(scrub('contact ada.okafor1@example.com now')).toBe('contact [email hidden] now');
     expect(scrub('Ada Okafor paid', ['Okafor'])).toBe('Ada [hidden] paid');
     expect(maskEmail('ada.okafor1@example.com')).toBe('ad***@example.com');
+  });
+
+  it('drops template sections whose fact is empty or zero', () => {
+    const t = '{{#dead}}{{dead}} waiting: {{orders}}.{{/dead}}{{^dead}}None waiting.{{/dead}}';
+    expect(fill(t, { dead: 0, orders: [] })).toBe('None waiting.');
+    expect(fill(t, { dead: 2, orders: ['Ada (order 1)', 'Ben (order 2)'] })).toBe('2 waiting: Ada (order 1), Ben (order 2).');
   });
 
   it('backs off exponentially with a cap', () => {
